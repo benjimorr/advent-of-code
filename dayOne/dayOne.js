@@ -1,4 +1,4 @@
-const getData = require('./readFile');
+const getData = require('../readFile');
 
 const calculateFrequency = numbers => {
   const frequencyLog = {};
