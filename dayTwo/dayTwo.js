@@ -34,16 +34,24 @@ const findMostCommonId = boxIds => {
   let commonLetters = [];
 
   boxIds.forEach(boxId => {
-    boxIds.filter(potentialMatch => {
-      if (boxId === potentialMatch) break;
+    boxIds.forEach(potentialMatch => {
+      if (boxId !== potentialMatch) {
+        const currentCommonLetters = [];
 
-      for (let char of boxId) {
-        // code here
+        for (let i = 0; i < boxId.length; i++) {
+          if (boxId.charAt(i) === potentialMatch.charAt(i)) {
+            currentCommonLetters.push(boxId.charAt(i));
+          }
+        }
+
+        if (currentCommonLetters.length > commonLetters.length) {
+          commonLetters = currentCommonLetters;
+        }
       }
     });
   });
 
-  return commonLetters;
+  return commonLetters.join('');
 };
 
 getData('./dayTwo.txt').then(data => {
