@@ -1,5 +1,6 @@
 const getData = require('../readFile');
 
+// Part One
 const calculateCheckSum = boxIds => {
   const letterFrequency = { '2': 0, '3': 0 };
 
@@ -26,4 +27,25 @@ const calculateCheckSum = boxIds => {
 
 getData('./dayTwo.txt').then(data => {
   console.log(`Checksum is: ${calculateCheckSum(data.split('\n'))}`);
+});
+
+// Part Two
+const findMostCommonId = boxIds => {
+  let commonLetters = [];
+
+  boxIds.forEach(boxId => {
+    boxIds.filter(potentialMatch => {
+      if (boxId === potentialMatch) break;
+
+      for (let char of boxId) {
+        // code here
+      }
+    });
+  });
+
+  return commonLetters;
+};
+
+getData('./dayTwo.txt').then(data => {
+  console.log(`Common letters are: ${findMostCommonId(data.split('\n'))}`);
 });

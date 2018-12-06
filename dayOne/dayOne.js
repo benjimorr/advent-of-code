@@ -1,5 +1,6 @@
 const getData = require('../readFile');
 
+// Part Two
 const calculateFrequency = numbers => {
   const frequencyLog = {};
   let accStart = 0;
