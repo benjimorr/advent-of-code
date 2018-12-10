@@ -1,6 +1,10 @@
 const getData = require('../readFile');
 
-// Part One
+const getBoxId = text => {
+  const textArr = text.split(' ');
+  return textArr[0];
+};
+
 const getNumbersFromString = text => {
   const textArr = text.split(' ');
   const boxId = textArr[0];
@@ -81,17 +85,30 @@ const findIntactBoxId = claims => {
     return getNumbersFromString(plan);
   });
 
+  const boxIds = claims.map(plan => {
+    return getBoxId(plan);
+  });
+
   fabricCutouts.map(cutout => {
     cutFabric(fabricLayout, ...cutout);
   });
 
-  console.log(fabricLayout);
+  Object.values(fabricLayout).map(row => {
+    Object.values(row).forEach(square => {
+      if (square.length > 1) {
+        square.map(id => {
+          const idIndex = boxIds.indexOf(id);
+          if (idIndex > -1) {
+            boxIds.splice(idIndex, 1);
+          }
+        })
+      }
+    });
+  });
+
+  return boxIds;
 };
 
-const testData = ['#1 @ 1,3: 4x4', '#2 @ 3,1: 4x4', '#3 @ 5,5: 2x2'];
-
-console.log(`Intact boxId is: ${findIntactBoxId(testData)}`);
-
-// getData('./dayThree.txt').then(data => {
-//   console.log(`Intact boxId is: ${findIntactBoxId(data.split('\n'))}`);
-// });
+getData('./dayThree.txt').then(data => {
+  console.log(`Intact boxId is: ${findIntactBoxId(data.split('\n'))}`);
+});
